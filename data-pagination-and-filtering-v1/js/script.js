@@ -4,24 +4,13 @@ FSJS Project 2 - Data Pagination and Filtering
 */
 
 
-
 /*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-console.log(data);
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
+The 'showPage' function will display nine students to the page, organizing their information into nodes, 
+then appending these nodes to the DOM. 
 */
 function showPage(list, page) {
    startIndex = (page * 9) - 9;
    endIndex = page * 9;
-   console.log(startIndex);
-   console.log(endIndex);
    studentList = document.querySelector('.student-list');
    studentList.innerHTML = '';
    for (i = 0; i < list.length; i++) {
@@ -44,11 +33,10 @@ function showPage(list, page) {
 
 }
    
-showPage(data, 1)
 
 /*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
+The 'addPagination' function takes the list, divides it into a number of pages, creates buttons for each of these
+page numbers, and makes the buttons clickable with an active state. 
 */
 function addPagination(list) {
    let numOfPages = Math.ceil(list.length / 9);
@@ -62,8 +50,21 @@ function addPagination(list) {
       `
       linkList.insertAdjacentHTML('beforeend', pages);
    }
-   const firstButton = document.querySelector('button')[0];
+   const firstButton = document.querySelector('.link-list button');
    firstButton.className = 'active';
+
+   linkList.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+         const activeButton = document.querySelector('.active');
+         activeButton.className = '';
+         e.target.className = 'active';
+         showPage(list, e.target.textContent)
+      }
+   });
 }
+
+
+/*Here, I am calling both functions, passing in the data and the page an argument in the former 
+and the data as an argument in the latter*/
+showPage(data, 1)
 addPagination(data)
-// Call functions
