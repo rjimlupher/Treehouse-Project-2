@@ -6,7 +6,8 @@ FSJS Project 2 - Data Pagination and Filtering
 
 /*
 The 'showPage' function will display nine students to the page, organizing their information into nodes, 
-then appending these nodes to the DOM. 
+then appending these nodes to the DOM. The template literal contains the formatting as well as the information
+to be appended. 
 */
 function showPage(list, page) {
    startIndex = (page * 9) - 9;
@@ -35,8 +36,9 @@ function showPage(list, page) {
    
 
 /*
-The 'addPagination' function takes the list, divides it into a number of pages, creates buttons for each of these
-page numbers, and makes the buttons clickable with an active state. 
+The 'addPagination' function takes the list, divides it into a number of pages, creates buttons for 
+each of these page numbers, and makes the buttons clickable with an active state. I then use an event listener
+to listen for a click, changing the page as well as the active state of the button. 
 */
 function addPagination(list) {
    let numOfPages = Math.ceil(list.length / 9);
